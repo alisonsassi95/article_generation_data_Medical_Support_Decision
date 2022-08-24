@@ -25,7 +25,10 @@ Universidade Regional do Noroeste do Estado do Rio Grande do Sul
 
 \maketitle
 
-\section{RESUMO} 
+\section{RESUMO}
+
+Nos últimos cem anos, a maior pandemia ocasionado pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário do colapso da estrutura hospitalar pública, falta de leitos, falta de respiradores e também profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, nesse momento os médicos tiveram um enorme desafio de entender a prioridade de um paciente em um leito de UTI, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico . Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo, para minimizar a quantidade de mortes.
+
 Em um cenário onde as internações de pessoas em leitos de Unidade de Terapia Intensiva (UTI) aumentaram gradativamente diante dos casos clínicos críticos suscitados pelo vírus causador da COVID-19 ocasionando a escassez de leitos hospitalares, o médico intensivista vivenciou a inquietude de uma decisão da escolha do próximo paciente a medida que os leitos vão sendo desocupados, ocasionando problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico. Neste cenário as decisões equivocadas podem ocasionar o mau uso de leitos de UTI com processos de distanásia contribuindo  ainda mais, para escassez de leitos. Com um modelo computacional capturando as variáveis de decisão baseada em dados do paciente, o profissional poderá se apoiar na transparência da sugestão que o modelo oferecerá. Para esse modelo baseado em dados do paciente se tornar algo factível, será necessário utilizar um protocolo que através de variáveis informadas, possa fazer uma listagem dos pacientes que necessitarão de um leito de UTI. Este artigo tem por objetivo descrever o modelo utilizado para a triagem, explica a forma que as variáveis foram extraídas e demonstra a criação da geração de uma base de dados para uma validação dos dados com médicos especialistas.
 
 \textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI). Escassez de leitos hospitalares. Auxílio médico. Gerenciamento hospitalar. Protocolo.
@@ -79,7 +82,7 @@ Somente a arquitetura não é capaz de criar o sistema, deve existir tecnologias
 \section{MODELO COMPUTACIONAL}
 
 O modelo computacional se baseará no protocolo da Associação de Medicina Intensiva Brasileira (AMIB), de alocação de recursos em esgotamento durante a pandemia por COVID-19, pois entende-se que esse protocolo pode se estender para os dias pós pandemia. O protocolo busca um alinhamento com os critérios da resolução que priorizam a maior necessidade, expectativa de benefícios e adota a recomendação de que pacientes com baixa prioridade e que estão próximos à morte recebam preferencialmente cuidados paliativos. O protocolo AMIB contribui com a aplicação da resolução na medida que oferece critérios mais objetivos de avaliação de benefícios, aliviando o profissional do peso dessa tarefa em tempos de pandemia e garantindo que elas tenham maior consistência.
-O modelo usará as variáveis extraídas do protocolo AMIB, sendo elas parte do protocolo Sequential Organ Failure Assessment (SOFA), com o objetivo de levantar e ensinar para o modelo quais os fatores de risco para a vida do paciente.
+O modelo usará as variáveis extraídas do protocolo AMIB, sendo elas parte do Escore de falência de órgãos (protocolo Sequential Organ Failure Assessment - SOFA), com o objetivo de levantar e ensinar para o modelo quais os fatores de risco para a vida do paciente.
 Utilizará de inteligência artificial supervisionada para realizar a lista de prioridades, e com seu aprendizado constante poderá efetuar uma melhor escolha, podendo se tornar uma ferramenta de apoio ensinado pelo profissional de saúde.
 
 \section{ETAPA DE VALIDAÇÃO}

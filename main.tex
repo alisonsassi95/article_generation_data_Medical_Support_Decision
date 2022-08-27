@@ -27,25 +27,84 @@ Universidade Regional do Noroeste do Estado do Rio Grande do Sul
 
 \section{RESUMO}
 
-Nos últimos cem anos, a maior pandemia ocasionado pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário do colapso da estrutura hospitalar pública, falta de leitos, falta de respiradores e também profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, nesse momento os médicos tiveram um enorme desafio de entender a prioridade de um paciente em um leito de UTI, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico . Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo, para minimizar a quantidade de mortes.
+Nos últimos cem anos, a maior pandemia ocasionado pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário do colapso da estrutura hospitalar pública, falta de leitos, de respiradores e profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, nesse momento os médicos tiveram um enorme desafio de entender a prioridade de um paciente em um leito de UTI, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico. Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo para salvar mais vidas. Dentre muitos protocolos, foi publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB) um protocolo que inclui um modelo de triagem para um auxílio prático aos profissionais de saúde diante de decisões complexas associadas a alocação de leitos de UTI e ventiladores. Este artigo tem por objetivo descrever o modelo publicado pela AMIB utilizado para a triagem, explicar a forma que as variáveis foram extraídas e demonstrar a criação da geração de uma base de dados para uma validação dos dados com médicos especialistas.
 
-Em um cenário onde as internações de pessoas em leitos de Unidade de Terapia Intensiva (UTI) aumentaram gradativamente diante dos casos clínicos críticos suscitados pelo vírus causador da COVID-19 ocasionando a escassez de leitos hospitalares, o médico intensivista vivenciou a inquietude de uma decisão da escolha do próximo paciente a medida que os leitos vão sendo desocupados, ocasionando problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico. Neste cenário as decisões equivocadas podem ocasionar o mau uso de leitos de UTI com processos de distanásia contribuindo  ainda mais, para escassez de leitos. Com um modelo computacional capturando as variáveis de decisão baseada em dados do paciente, o profissional poderá se apoiar na transparência da sugestão que o modelo oferecerá. Para esse modelo baseado em dados do paciente se tornar algo factível, será necessário utilizar um protocolo que através de variáveis informadas, possa fazer uma listagem dos pacientes que necessitarão de um leito de UTI. Este artigo tem por objetivo descrever o modelo utilizado para a triagem, explica a forma que as variáveis foram extraídas e demonstra a criação da geração de uma base de dados para uma validação dos dados com médicos especialistas.
+\textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI). Escassez de leitos hospitalares. Auxílio médico. Triagem. Protocolo.
 
-\textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI). Escassez de leitos hospitalares. Auxílio médico. Gerenciamento hospitalar. Protocolo.
-
-\section{ABSTRACT} 
-In a scenario where admissions in Intensive Care Unit (ICU) beds gradually increased due to critical clinical cases caused by the COVID-19 virus, resulting in a shortage of hospital beds, the intensivist physician experienced the anxiety of deciding on the next patient as the beds are being vacated, causing psychological problems, often being a choice based on the physician's emotions. In this scenario, wrong decisions may cause misuse of ICU beds with dysthanasia processes, contributing even more to the shortage of beds. With a computer model capturing the decision variables based on patient data, the professional will be able to rely on the transparency of the suggestion that the model will offer. For this model based on patient data to become feasible, it will be necessary to use a protocol that through informed variables, can list the patients who will need an ICU bed. This article presents the model used, the way the variables were treated and the generation of a database for validation with medical specialists.
+\section{ABSTRACT}
 
 \textbf{Keywords:} Intensive Care Unit (ICU). Shortage of hospital beds. Medical assistance. Hospital management. Protocol.
 
 \section{INTRODUÇÃO}
-A oferta de leitos de Unidade de Terapia Intensiva (UTI) é historicamente escassa no Brasil \cite{murthy2015intensive}. Em 2018 o Conselho Federal de Medicina (CFM) realizou uma pesquisa tendo como base a indicação da Associação de Medicina Intensiva Brasileira na qual se aponta a necessidade de 1 a 3 leitos de UTI para cada 10 mil habitantes \cite{domingues2018numero}. De acordo com o Conselho Federal de Medicina, no ano de 2018, 21.500 leitos de UTI no Brasil foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}.
-Conforme o Conselho Federal de Medicina, em fevereiro de 2020 o Cadastro Nacional de Estabelecimentos de Saúde indicava a existência de 46 mil unidades de UTI, sendo metade disponível para o SUS e a outra metade reservada aos planos de saúde e à rede privada. Ao longo de 10 anos, entre junho de 2011 e junho de 2020, esse número aumentou em torno de 38\%. Com o surgimento da pandemia do covid-19, de fevereiro a junho de 2020 o número de leitos no SUS aumentou cerca de dez mil unidades totalizando 31.800 leitos de UTI no Brasil.
-De acordo com \textbf{Pitta (2021)}, mesmo com o aumento de leitos, ainda há apenas uma unidade de terapia intensiva para aproximadamente dez mil habitantes no Brasil, o que debilita o sistema público de saúde e o deixa extremamente frágil para enfrentar situações pandêmicas, como a que vivemos atualmente \cite{pimentel2020design}. Durante a pandemia, foi necessário aumentar drasticamente o número de leitos no Brasil em cerca de 45\% no primeiro semestre de 2020, mas segundo \textbf{CFM (2020)}, os órgãos federais estão solicitando devoluções de leitos, o que reduzirá drasticamente o número de leitos no período pós pandemia.
-Historicamente o Brasil tem uma carência de leitos disponíveis para a população, a pandemia trouxe uma superlotação de leitos e sobrecarga dos profissionais. Em São Paulo, Estado que tem a maior estrutura hospitalar do país, no primeiro trimestre de 2021, morreram pelo menos 135 pessoas à espera de uma vaga na UTI. O Paraná, no mesmo período, totalizou 500 mortes aguardando a disponibilidade de leitos de UTI e enfermaria, e 1.196 paranaenses aguardavam por uma vaga, segundo o governo do Estado \cite{fundacaooswaldocruz2021}. Além da falta de vagas, faltam médicos capacitados para trabalhar nas unidades; Segundo \textbf{Martins (2021)} “O ideal seria que o país tivesse cinco a seis vezes mais a quantidade de médicos intensivistas do que temos hoje para atender com plena capacidade em todos os leitos de UTI”.
-Uma pesquisa realizada pela Fundação Getúlio Vargas e Fundação Oswaldo Cruz consultou 1.829 profissionais de saúde no Brasil em março de 2021, 85,4\% dos médicos entrevistados relataram que tiveram sua saúde mental afetada negativamente pela pandemia \cite{paulomotoryn2021}. Um dos pontos que influenciam diretamente e tem provocado grandes mudanças psicológicas negativas durante a pandemia, é a responsabilidade que o médico tem de escolher qual paciente tem o quadro clínico mais adequado para poder ocupar um leito de UTI \cite{teixeira2020processo}.
-Diante da complexidade e inusitados casos clínicos, a tomada de decisão exige mais rapidez, assertividade na resposta e baseado nos dados pessoais do paciente, agilizando o processo de ocupação do leito de UTI e também para outros pacientes que estão na espera. Alguns trabalhos estão desenvolvendo plataformas para trocas de informações interprofissionais entre as áreas médicas \cite{santos2020desenvolvimento}. Outros estão preocupados em encontrar uma forma de otimizar os leitos de UTI \cite{pinto2019alocaccao} utilizando variáveis comuns entre os pacientes para a alocação dos leitos de UTI. Muitos destes estudos não levam em consideração a personalização dos dados pessoais do paciente, realizando uma programação que pode ser equivocada dependendo do caso clínico.
-Com um modelo computacional capturando as variáveis de decisão baseada em dados do paciente, o profissional poderá se apoiar na transparência da sugestão que o modelo oferecerá. Para esse modelo baseado em dados do paciente se tornar algo factível, será necessário utilizar um protocolo que através de variáveis informadas, possa fazer uma listagem dos pacientes que necessitarão de um leito de UTI. O sistema utilizará modelo de Inteligência Artificial(IA), supervisionado, treinado para que o médico visualize os dados do paciente e sua respectiva prioridade dentre os que necessitam de internação na UTI.
+
+Em 31 de dezembro de 2019, uma grave pneumonia de origem desconhecida na província de Hubei, em Wuhan na China, foi reportada à Organização Mundial de Saúde (OMS), após dois meses, a OMS nomeou a síndrome respiratória aguda grave como "Covid-19" causada pelo novo vírus Sars-CoV-2 transmitida em alguns países europeus \cite{sa2020especial}.
+
+Em fevereiro do ano de 2020 foi registrado o primeiro caso no Brasil, com o nível de ameaça global muito elevado no mundo todo, assim se tornando a maior pandemia dos últimos cem anos.
+Por ser uma doença facilmente contagiosa, através de gotículas de saliva, e sendo constantemente modificada geneticamente, os casos aumentaram exponencialmente em todos os estados do Brasil, ocasionando problemas respiratórios resultando em internações de Unidade de Terapia Intensiva (UTI).
+
+O Conselho Federal de Medicina (CFM) aponta a necessidade de 1 a 3 leitos de UTI para cada 10 mil habitantes, tendo como base a indicação da Associação de Medicina Intensiva Brasileira \cite{domingues2018numero}. De acordo com o Conselho Federal de Medicina, no ano de 2018, 21.500 leitos de UTI no Brasil foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}, ainda mais com a oferta de leitos de UTI que é historicamente escasso no Brasil pelo seu alto custo \cite{murthy2015intensive}. No ano de 2020 com a alta quantidade de novos casos de COVID-19 foram disponibilizados 3.104 novos leitos apenas para leitos de UTI SUS \cite{cotrim2020crescimento}.
+
+Diante da estrutura hospitalar precária em hospitais públicos, os leitos de UTI ficaram escassos rapidamente, o que ocasionou muitas mortes por falta de recursos. Os profissionais de saúde na linha de frente de atendimento se depararam com o fato de uma escassez de recursos para um grande número de indivíduos necessitados deles. Surge-se então o acionamento de protocolos para a triagem para uma minimização de mortes devido à doença. A não utilização de protocolos implicaria em situações absurdamente imorais, tais como a chegada do recurso escasso por ordem de entrada ou mesmo sorteio ou ainda a não oferta do recurso para ninguém \cite{costa2020protocolos}.
+
+Um protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira trouxe algumas regras pensadas pela equipe médica para serem eticamente defensíveis, garantindo que processos de alocação de recursos em esgotamento não ocorram em segredo, sem registro apropriado e de maneira subjetiva e inconsistente. O protocolo surgiu para que as escolhas médicas sejam claras, transparentes, tecnicamente bem embasados, eticamente justificados e que estejam alinhados ao arcabouço legal brasileiro \cite{kretzer2020protocolo}.
+
+
+\section{Associação de Medicina Intensiva Brasileira (AMIB)}
+
+Em momentos não pandêmicos, os serviços em saúde de oferta de leitos de UTI, são baseados na necessidade de terapias de suporte orgânico e probabilidade de recuperação não havendo protocolos de triagem de pacientes. Nesse cenário, quando não há escassez de leitos de UTI, o médico deve levar em consideração que a utilização do recurso tenha um benefício prognóstico das terapias, não sendo considerada uma infração ética ou legal que medidas de suporte orgânico não sejam oferecidas a pacientes que se encontram em final de vida, sendo uma decisão compartilhada entre a equipe assistente, paciente e familiares, de maneira a refletir não apenas aspectos clínicos mas também os valores e desejos dos envolvidos, respeitando à dignidade intrínseca de cada pessoa recebendo cuidados que tenham como objetivo oferecer a melhor qualidade de sobrevida, incluindo controle impecável de sintomas e acolhimento das necessidades emocionais, sociais e espirituais tanto do paciente quanto de seus familiares.
+
+No cenário pandêmico como aconteceu no ano de 2020, provocando o indesejável esgotamento dos recursos de leitos de UTI e de ventiladores mecânicos, não foi possível aplicar em todos os casos uma decisão compartilhada com os envolvidos devido à incerteza do conhecimento do vírus como também a grande quantidade de casos simultâneos e sobrecarga nas equipes de saúde. Diante da situação colocada da responsabilidade de haver preparo para a possibilidade de racionamento de recursos
+esgotados, estamos propondo um protocolo que inclui um modelo de triagem que tem como objetivo auxílio prático aos profissionais de saúde diante de decisões complexas associadas a alocação de leitos de UTI e
+ventiladores.
+
+
+Entre outros, um dos objetivos do Protocolo AMIB de alocação de recursos em esgotamento durante a pandemia por COVID-19 é retirar das mãos de profissionais que estão na linha de frente do cuidado a responsabilidade de tomar decisões emocionalmente exaustivas e que possam aumentar os já elevados riscos de problemas de saúde mental provocados pela pandemia da COVID-19 e consequentemente comprometer a capacidade para o trabalho a curto e longo prazo.
+
+Profissionais da saúde desejam conduzir seus trabalhos moralmente. Tomar decisões de grande peso moral de maneira subjetiva e sem apoio institucional ou de recomendações formais pode ser emocionalmente debilitante.
+
+A responsabilidade quanto aos princípios que devem guiar decisões de alocação de recursos escassos, portanto, ao envolver questões de justiça distributiva deve ser idealmente compartilhada com as autoridades competentes
+
+Somam-se as preocupações com potenciais questionamentos jurídicos relacionadas às decisões e que também podem aumentar os riscos de danos à saúde mental dos profissionais.
+
+A utilização de um protocolo de maneira consistente pelas diversas instituições de saúde garante que um maior número de pacientes sejam igualmente sujeitos aos mesmos critérios chancelados pelas autoridades responsáveis tanto pelo zelo técnico-científico quanto o ético-legal do processo.
+
+
+\section{Calculos do Amib }
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.9]{img/Tabela de pontuacoes e criterios.png}
+    \centering
+    \caption{Calculo de pontuação e critério de desempate do modelo de triagem AMIB.}
+    \label{subexpressao}
+\end{figure}
+
+O SOFA (abreviação para Sequential Sepsis-related Organ Failure Assessment), originalmente derivado de um estudo de coorte com 1449 pacientes internados em UTIs de 16 países nos anos 90, avalia objetivamente o avanço de uma disfunção orgânica em pacientes que apresentam alguma infecção, bem como a mortalidade diante de um estado de saúde crítico de um indivíduo.
+O SOFA avalia 6 sistemas diferentes a partir de diversos exames clínicos e laboratoriais, e prediz a mortalidade de pacientes com sepse a partir da pontuação.
+
+A tabela 1 demonstra a relação entre a pontuação no SOFA e a mortalidade:
+PONTUAÇÃO SOFA	MORTALIDADE EM X%
+0–6	<10\%
+7–9	15–20\%
+10–12	40–50\%
+13–14	50–60\%
+15	>80\%
+15–24	>90\%
+
+Esse score é baseado em seis diferentes variáveis, que avaliam os sistemas respiratório, cardiovascular, hepático, renal, neurológico e de coagulação. A cada sistema é atribuída uma pontuação de 0 (classificado como dentro dos parâmetros de normalidade) e 4 (alto grau de disfunção), totalizando um máximo de 24 pontos. A pontuação deve ser calculada 24 horas após a admissão e a cada 48 horas depois — justificando o termo “sequencial” do nome da pontuação.
+
+
+SISTEMA RESPIRATÓRIO: é avaliado a partir da razão entre PaO2/FiO2, a partir de dados obtidos através de gasometria arterial. Essa razão é dada em milímetros de mercúrio (mmHg) e é considerada sem alterações quando seu valor está acima de 400mmHg. Abaixo de 400, 1 ponto no SOFA. Abaixo de 300, 2 pontos. A pontuação é 3 quando o paciente está em suporte ventilatório com a PaO2/FiO2 abaixo de 200, e ele recebe a pontuação máxima quando a relação tem resultado menor que 100mmHg com suporte ventilatório.
+
+COAGULAÇÃO: é avaliada a partir do plaquetograma. O valor considerado de referência, ou seja, que não pontua no score SOFA, é 150.000/mm³. Os valores de corte para as pontuações de 1 a 4, respectivamente, são abaixo de 150, 100, 50 e 20. 
+
+AVALIAÇÃO HEPÁTICA: realizada com o exame de bilirrubinas totais, que é considerado dentro dos valores de normalidade quando está abaixo de 1,2mg/dL.
+
+SISTEMA CARDIOVASCULAR: o paciente que apresenta hipotensão e necessidade de droga vasoativa (DVA) é quem pontua nesta parte do score. É mensurado a partir da pressão arterial média, que recebe 1 ponto em caso de PAM<70mmHg. A partir do 2º ponto, é considerado o uso de DVA – 2 pontos se uso de dopamina<5 ou dobutamina em qualquer dose;  3 pontos em caso de uso de dopamina, noradrenalina ou adrenalina em doses mais baixas, e em caso de aumento da dosagem das DVAs, o paciente recebe a pontuação de 4 pontos.
+
+SISTEMA NEUROLÓGICO: recebe avaliação a partir da escala de coma de Glasgow, conforme tabela 2. 
+SISTEMA RENAL: é avaliado por dois parâmetros – creatinina e o débito urinário (a partir de 3 pontos). A creatinina se demonstra alterada a partir de 1,2mg/dL, pontuando 1 até 1,9mg/dL. Valores de 2,0 a 3,4mg/dL pontuam 2, enquanto o paciente que apresenta diurese menor que 500 ml por dia OU creatinina de 3,5 a 4,9mg/dL pontua 3. Quando a diurese é inferior a 200 ml por dia ou a creatinina é superior a 5, o paciente recebe o score máximo. 
+
 
 
 \section{MÉTODO CIENTÍFICO}
@@ -56,32 +115,9 @@ Para apresentar a solução de maneira científica, deve ser escolhida uma metod
 Nos resultados a seguir, está explicada a fase técnica para geração dos dados que serão homologados na fase de validação do modelo computacional da pesquisa.
 
 
+\section{GERAÇÃO DE DADOS}
 
-
-\section{PROPOSTA DA PESQUISA}
-No cenário em que o setor de UTI em um hospital está com todos os leitos ocupados, e ainda, pacientes esperando por uma vaga, o médico encarregado deve definir qual paciente será o próximo a ocupar um leito da UTI quando estiver vago. Amiudadamente o médico elege o paciente, com condições físicas e/ou emocionais como, uma alta carga de estresse, constante tensão emocional baseado em sentimentos e cansaço físico, que podem influenciar na decisão.
-Conhecendo esses problemas, tem-se buscado a tecnologia para auxiliar o profissional de saúde a diminuir a grande carga que possui. Uma solução que se encaixa para resolver esse problema, é a inteligência artificial (IA), com ela é possível ensinar o sistema para fazer um posicionamento através de variáveis bem definidas em um modelo computacional criado, onde deve estar diretamente conectado nos dados de saúde de cada paciente.
-Os critérios que o modelo computacional utilizará, estão baseados em um protocolo utilizado pelos profissionais de saúde, portanto, para essa solução, foi escolhido como base o protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB), fundamentado no modelo do protocolo de triagem proposto por \textbf{Biddison et al.}\cite{biddison2019too} e se assemelha ao modelo do protocolo de triagem proposto por \textbf{White}\cite{white2009should, white2020}.
-A proposta deste projeto tem a intenção de disponibilizar ao médico uma listagem dos pacientes promovendo o acesso transparente a leitos de UTI escassos. Possibilitará uma alta velocidade na decisão, com o uso da inteligência artificial, entregará uma assertividade baseada em dados do paciente e nas recomendações da Associação de Medicina Intensiva Brasileira (AMIB) para a abordagem do covid-19.
-
-
-\section{ARQUITETURA}
-A proposta da arquitetura tem objetivo de otimizar tempo neste trabalho, pois se baseará no framework django, composta com a arquitetura MTV (Model, Template, View). A camada Template é a responsável pelas páginas visuais, onde o usuário estará em contato direto, enviando as informações para a próxima camada. A camada View recebe as informações que estão sendo enviadas e as processa conforme a programação, devolvendo as informações para o Template. A View é uma camada intermediária da arquitetura, tendo contato contínuo com a camada Model. Por fim, a camada Model tem a responsabilidade de conexão entre o sistema gerenciador de banco de dados, PostgreSQL, com a camada View.
-Na Figura abaixo é demonstrado de forma abrangente, como as camadas da arquitetura se conectam para chegar no resultado final. Existe a interface que está diretamente conectada com o médico, sendo uma interação humano-computador. A partir desta camada, é realizada a comunicação com a regra de negócio definida no sistema e o modelo computacional. Após o processamento das informações, o resultado esperado será retornado na interface para o médico, a listagem realizada.
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.9]{img/Arquitetura-MDS.png}
-    \centering
-    \caption{Arquitetura proposta para a pesquisa.}
-    \label{subexpressao}
-\end{figure}
-
-Somente a arquitetura não é capaz de criar o sistema, deve existir tecnologias para a implementação das regras e modelo, assim como a estilização e funcionalidades da interface. Para isso propõem-se utilizar algumas tecnologias que são fundamentais para criação do sistema, tais como: HyperText Markup Language (HTML), para construção de páginas na Web; Cascading Style Sheets (CSS), para estilização das páginas; e a linguagem de programação JavaScript, para ações nas páginas, gerando a interface do sistema.
-
-\section{MODELO COMPUTACIONAL}
-
-O modelo computacional se baseará no protocolo da Associação de Medicina Intensiva Brasileira (AMIB), de alocação de recursos em esgotamento durante a pandemia por COVID-19, pois entende-se que esse protocolo pode se estender para os dias pós pandemia. O protocolo busca um alinhamento com os critérios da resolução que priorizam a maior necessidade, expectativa de benefícios e adota a recomendação de que pacientes com baixa prioridade e que estão próximos à morte recebam preferencialmente cuidados paliativos. O protocolo AMIB contribui com a aplicação da resolução na medida que oferece critérios mais objetivos de avaliação de benefícios, aliviando o profissional do peso dessa tarefa em tempos de pandemia e garantindo que elas tenham maior consistência.
+O roteiro do código se baseará no protocolo da Associação de Medicina Intensiva Brasileira (AMIB), de alocação de recursos em esgotamento durante a pandemia por COVID-19, pois entende-se que esse protocolo pode se estender para os dias pós pandemia. O protocolo busca um alinhamento com os critérios da resolução que priorizam a maior necessidade, expectativa de benefícios e adota a recomendação de que pacientes com baixa prioridade e que estão próximos à morte recebam preferencialmente cuidados paliativos. O protocolo AMIB contribui com a aplicação da resolução na medida que oferece critérios mais objetivos de avaliação de benefícios, aliviando o profissional do peso dessa tarefa em tempos de pandemia e garantindo que elas tenham maior consistência.
 O modelo usará as variáveis extraídas do protocolo AMIB, sendo elas parte do Escore de falência de órgãos (protocolo Sequential Organ Failure Assessment - SOFA), com o objetivo de levantar e ensinar para o modelo quais os fatores de risco para a vida do paciente.
 Utilizará de inteligência artificial supervisionada para realizar a lista de prioridades, e com seu aprendizado constante poderá efetuar uma melhor escolha, podendo se tornar uma ferramenta de apoio ensinado pelo profissional de saúde.
 
@@ -112,7 +148,6 @@ Com as 6 variáveis do SOFA sendo geradas entre números inteiros entre 0 e 4, a
     \includegraphics[scale=0.6]{img/massa de dados gerada.png}
     \centering
     \caption{Massa de dados gerada.}
-    \label{subexpressao}
 \end{figure}
 
 O modelo proposto no protocolo AMIB 2020 foi composto por um sistema de avaliação de múltiplos critérios que representam diferentes objetivos éticos: i) salvar o maior número de vidas; ii) salvar o maior número de anos/vida; iii) equalizar as oportunidades de se passar pelos diferentes ciclos da vida. O sistema de pontuação pode variar do número dois a onze, onde quanto menor é a pontuação de um paciente, maior será a sua prioridade de alocação de recursos escassos. Quanto maior o número de pacientes a serem triados, maior será a expectativa de empates nas pontuações e por esta razão o protocolo, assim como o de Biddinson et al, também inclui sugestões de critérios de desempate, os quais serão calculados juntos com a base de treinamento, para isso levantou-se os critérios. Em caso de desempate o presente modelo sugere os seguintes critérios de desempate sequenciais:
@@ -124,13 +159,6 @@ O modelo proposto no protocolo AMIB 2020 foi composto por um sistema de avaliaç
 
 Um segmento da base de dados gerado sinteticamente, o qual contém o cálculo de critérios de desempate, será utilizado para que a Rede Neural possa analisar em conjunto com os dados de cada paciente.
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.6]{img/massa de dados gerada.png}
-    \centering
-    \caption{Massa de dados gerada com critérios.}
-    \label{subexpressao}
-\end{figure}
 
 Com os dados gerados, foi possível criar um sistema capaz de separar em grupos definidos de dez registros, distribuídos de forma agrupada com o objetivo de que uma equipe médica possa validar a ordenação de cada grupo, entendendo qual paciente deve ter a prioridade conforme sua experiência. 
 Um ou mais grupos serão compostos por dez registros hipotéticos, com as variáveis extraídas do protocolo AMIB de alocação de recursos em esgotamento durante a pandemia por COVID-19, sendo validados com um médico especialista de forma de listagem em ordem de prioridade conforme sua experiência profissional.

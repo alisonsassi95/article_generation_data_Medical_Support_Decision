@@ -4,6 +4,9 @@
 
 \usepackage{graphicx,url}
 
+\usepackage{amssymb}
+\usepackage{amsmath}
+
 \usepackage{float}
 \usepackage[utf8]{inputenc}  
 
@@ -78,9 +81,80 @@ Somente a arquitetura não é capaz de criar o sistema, deve existir tecnologias
 
 \section{MODELO COMPUTACIONAL}
 
-O modelo computacional se baseará no protocolo da Associação de Medicina Intensiva Brasileira (AMIB), de alocação de recursos em esgotamento durante a pandemia por COVID-19, pois entende-se que esse protocolo pode se estender para os dias pós pandemia. O protocolo busca um alinhamento com os critérios da resolução que priorizam a maior necessidade, expectativa de benefícios e adota a recomendação de que pacientes com baixa prioridade e que estão próximos à morte recebam preferencialmente cuidados paliativos. O protocolo AMIB contribui com a aplicação da resolução na medida que oferece critérios mais objetivos de avaliação de benefícios, aliviando o profissional do peso dessa tarefa em tempos de pandemia e garantindo que elas tenham maior consistência.
-O modelo usará as variáveis extraídas do protocolo AMIB, sendo elas parte do Escore de falência de órgãos (protocolo Sequential Organ Failure Assessment - SOFA), com o objetivo de levantar e ensinar para o modelo quais os fatores de risco para a vida do paciente.
-Utilizará de inteligência artificial supervisionada para realizar a lista de prioridades, e com seu aprendizado constante poderá efetuar uma melhor escolha, podendo se tornar uma ferramenta de apoio ensinado pelo profissional de saúde.
+Considerando o protocolo AMIB, existem nove critérios clinicos a serem havaliados para a tomada de decisão, denotados $a_1$ até $a_9$:
+
+\[
+    \begin{split}
+        a_1 &\in \mathbb{Z}; 20 \ge a_1 \ge 85\text{, sendo a idade do paciente} \\
+        a_2 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério neurológico} \\
+        a_3 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério respiratório} \\
+        a_4 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério cardio-vascular} \\
+        a_5 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério renal} \\
+        a_6 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério hepático} \\
+        a_7 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério eu não lembro mais} \\
+        a_8 &\in \{0, 3\}; a_1 < 60 \implies a_8=0\text{, sendo o critério oncológico} \\
+        a_9 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério de comorbidades} \\
+    \end{split}
+\] 
+
+Notadamente, o protocolo não limita a idade para apneas as faixas descritas, o procolo é aplicável para situações conde há pacientes com menos de vinte anos ou com mais de oitenta e cinco.
+Essa restrição de idade foi decidida em prol da geração de dados, e poderia ser modificada.
+Outra observação que de deve ressaltar é de que o critério oncológico é sujeito, no protocolo AMIB, à idade do paciente, isso é, mesmo com indicação clínica de tumores, o critério só os considera para pacientes com mais de sessenta anos.
+
+Para a execução do protocolo são utilizadas as seguintes somas:
+
+\[
+\begin{split}
+    s &= \sum_{n=2}^{7} a_n\text{, sendo o SOFA} \\
+    t_1 &=  \begin{cases}
+        0, \text{se } a_1 < 99 \\
+        1, \text{se } 99 < a_1 < 99 \\
+        2, \text{se } 99 < a_1 < 99 \\
+        3, \text{se } 99 < a_1 < 99 \\
+        4, \text{se } 99 < a_1 \\
+    \end{cases} \\
+    t_2 &= \begin{cases}
+        0, \text{se } s < 99 \\
+        1, \text{se } 99 < s < 99 \\
+        2, \text{se } 99 < s < 99 \\
+        3, \text{se } 99 < s < 99 \\
+        4, \text{se } 99 < s \\
+    \end{cases} \\
+    t &= t_1 + t_2 + a_8 + a_9 \\ % TODO revisar a soma
+\end{split}
+\] 
+
+Dados dois pacietnes, $p_1$ e $p_2$, o protocolo decide entre os dois primeiramente comparando o valor de $t$ calculado para cada um, se  $t_{p_1}$ for menor que $t_{p_2}$ o protocolo prescreve que a preferência na obtenção do leito seja de  $p_1.$
+A reciproca, naturalmente, é verdadeira.
+No caso de $t$ ser igual para os dois pacientes, é realizada a comparação usando  $s$. 
+No caso de $t$ e de  $s$ serem iguais para os pacientes, utiliza-se o EU JÁ NEM ME LEMBRO MAIS.
+
+Notadamente, é possível desenhar dois pacientes para que o protocolo seja incapaz de fornecer distinção relevante a respeito de priorização de um em relação a outro, no caso em que o protocolo sugere randomização.
+Mais especificamente, é possível desenhar uma função $\alpha \in [0, 1]$ que informe o grau de certeza com o qual o protocolo determina a prioridade.
+
+\[
+\alpha = \begin{cases}
+    \frac{t_{p_1} - t{p_2}}{\max_t - \min_t}, \text{se } t_{p_1} - t_{p_2} \neq 0 \\
+    \frac{s_{p_1} - s{p_2}}{\max_s - \min_s}, \text{se } s_{p_1} - s_{p_2} \neq 0 \\
+    \ldots \\
+    0, \text{se o protocolo prescreve randomização}
+\end{cases}
+\] 
+
+Sendo um objetivo minimizar $\alpha$, é preciso destavar de que isso é trivial considerando o caso de dois pacientes com todos os critérios idênticos, mas esse caso foge do que é desejável, pois não são cabíveis quaisquer outros argumentos quanto a priorização.
+Para tando, se utiliza-se a noção de inercia ($i$) como medida de homogeneitdade, de forma que valores menores de $i$ implicam conjuntos de paciêntes mais homogêneos.
+A inércia pode ser calculada como o quadrado da disância de cada menbro do conjunto para o centro de gravidade do conjunto.
+
+\[
+i = \sum_{p \in P}d(p, c)^2
+\] 
+
+Considerando $P$ o conjunto de pacientes, $c$ o centro de massa desse conjutno e $d$ a distância euclideana.
+
+Com essas definições, é possível a construção de um conjunto de dados que maximize a obtenção de quais os critérios de decisão de um médico, presumindo que ele se informe pelo protocolo AMIB, mas que tome uma decisão médica para os casos em que o trotocolo prescreve randomização.
+Para tanto, qualquer que seja o conjunto de pacientes que o médico ordenará, esse deve maximizar a inercia e minimizar alfa.
+
+Considerando uma função de qualidade $\frac{i}{\alpha}$, razliza-se uma busca por um conjunto de dez pacientes da seguintes forma:
 
 \section{ETAPA DE VALIDAÇÃO}
 O processo de validação proposto, é através de casos clínicos hipotéticos, elaborados por grupos de médicos com experiência na área do setor de UTI que reflitam a realidade cotidiana. Os casos deverão ser cadastrados previamente na solução e validados por um profissional da saúde. Cada caso cadastrado na base será alocado a um grupo divididos em dez registros de pacientes, podendo se repetir nos grupos, conforme a aleatoriedade de um algoritmo para que não haja influência humana.

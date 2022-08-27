@@ -89,11 +89,11 @@ Considerando o protocolo AMIB, existem nove critérios clinicos a serem havaliad
         a_2 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério neurológico} \\
         a_3 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério respiratório} \\
         a_4 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério cardio-vascular} \\
-        a_5 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério renal} \\
+        a_5 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério coagulatório} \\
         a_6 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério hepático} \\
-        a_7 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério eu não lembro mais} \\
-        a_8 &\in \{0, 3\}; a_1 < 60 \implies a_8=0\text{, sendo o critério oncológico} \\
-        a_9 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério de comorbidades} \\
+        a_7 &\in \{0, 1, 2, 3, 4\}\text{, sendo o critério renal} \\
+        a_8 &\in \{0, 3\}\text{, sendo o critério de comorbidades (ICC)} \\
+        a_9 &\in \{0, 1, 2, 3, 4\}; a_1 < 60 \implies a_8=0\text{, sendo o critério oncológico (ECOG)} \\
     \end{split}
 \] 
 
@@ -107,18 +107,16 @@ Para a execução do protocolo são utilizadas as seguintes somas:
 \begin{split}
     s &= \sum_{n=2}^{7} a_n\text{, sendo o SOFA} \\
     t_1 &=  \begin{cases}
-        0, \text{se } a_1 < 99 \\
-        1, \text{se } 99 < a_1 < 99 \\
-        2, \text{se } 99 < a_1 < 99 \\
-        3, \text{se } 99 < a_1 < 99 \\
-        4, \text{se } 99 < a_1 \\
+        1, \text{se } & a_1 \le 49 \\
+        2, \text{se } 49 < & a_1 \le 69 \\
+        3, \text{se } 69 < & a_1 \le 84 \\
+        4, \text{se } 85 < & a_1 \\
     \end{cases} \\
     t_2 &= \begin{cases}
-        0, \text{se } s < 99 \\
-        1, \text{se } 99 < s < 99 \\
-        2, \text{se } 99 < s < 99 \\
-        3, \text{se } 99 < s < 99 \\
-        4, \text{se } 99 < s \\
+        1, \text{se } & s \le 8 \\
+        2, \text{se } 8 < & s \le 11 \\
+        3, \text{se } 11 < & s \le  14 \\
+        4, \text{se } 14 < & s \\
     \end{cases} \\
     t &= t_1 + t_2 + a_8 + a_9 \\ % TODO revisar a soma
 \end{split}
@@ -134,9 +132,9 @@ Mais especificamente, é possível desenhar uma função $\alpha \in [0, 1]$ que
 
 \[
 \alpha = \begin{cases}
-    \frac{t_{p_1} - t{p_2}}{\max_t - \min_t}, \text{se } t_{p_1} - t_{p_2} \neq 0 \\
-    \frac{s_{p_1} - s{p_2}}{\max_s - \min_s}, \text{se } s_{p_1} - s_{p_2} \neq 0 \\
-    \ldots \\
+    \frac{t_{p_1} - t_{p_2}}{\max_t - \min_t}, \text{se } t_{p_1} - t_{p_2} \neq 0 \\
+    \frac{a_{8p_1} - a_{8p_2}}{\max_{a_8} - \min_{a_8}}, \text{se } a_{8p_1} - a_{8p_2} \neq 0 \\
+    \frac{s_{p_1} - s_{p_2}}{\max_s - \min_s}, \text{se } s_{p_1} - s_{p_2} \neq 0 \\
     0, \text{se o protocolo prescreve randomização}
 \end{cases}
 \] 
@@ -146,7 +144,7 @@ Para tando, se utiliza-se a noção de inercia ($i$) como medida de homogeneitda
 A inércia pode ser calculada como o quadrado da disância de cada menbro do conjunto para o centro de gravidade do conjunto.
 
 \[
-i = \sum_{p \in P}d(p, c)^2
+I = \sum_{p \in P}d(p, c)^2
 \] 
 
 Considerando $P$ o conjunto de pacientes, $c$ o centro de massa desse conjutno e $d$ a distância euclideana.

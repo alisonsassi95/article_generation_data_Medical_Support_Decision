@@ -9,7 +9,6 @@
 
 \usepackage{float}
 \usepackage[utf8]{inputenc}  
-\usepackage{todonotes}
      
 \sloppy
 
@@ -30,7 +29,7 @@ Universidade Regional do Noroeste do Estado do Rio Grande do Sul
 
 \section{RESUMO}
 
-Nos últimos cem anos, a maior pandemia ocasionado pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário do colapso da estrutura hospitalar pública, falta de leitos, de respiradores e profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, portanto, médicos tiveram um desafio de entender a prioridade de um paciente em um leito de UTI devido a alta demanda, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseado no emocional do médico. Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo, para minimizar a quantidade de mortes, dentre eles o protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB). Este artigo tem por objetivo descrever o modelo publicado pela AMIB utilizado para a triagem, explicar a forma que as variáveis foram extraídas e demonstrar forma para uma geração de de dados sintéticos.
+Nos últimos cem anos, a maior pandemia ocasionada pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário de colapso da estrutura hospitalar pública, falta de leitos, de respiradores e profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, portanto, médicos tiveram um desafio de entender a prioridade de um paciente em um leito de UTI devido a alta demanda, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseada no emocional do médico. Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo, para minimizar a quantidade de mortes, dentre eles o protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB). Este artigo tem por objetivo descrever o modelo publicado pela AMIB utilizado para a triagem, explicar a forma que as variáveis foram extraídas e demonstrar a forma da geração de dados sintéticos, com a intenção de validação dos critérios sugeridos.
 
 \textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI); Escassez de leitos hospitalares; Auxílio para médico na triagem;. Protocolo AMIB/ABRAMEDEE. Escala SOFA.
 
@@ -43,15 +42,15 @@ Em 31 de dezembro de 2019 foi reportado casos de uma grave pneumonia de origem d
 
 Em fevereiro do ano de 2020 foi registrado o primeiro caso no Brasil, com o passar dos dias os casos aumentaram exponencialmente no mundo todo, alcançando um nível de ameaça global muito elevado, em poucos dias todos os estados do Brasil tinham centenas de pacientes com a doença, ocasionando em internações em leitos de UTI, se tornando a maior pandemia dos últimos cem anos.
 
-No Brasil os leitos de Unidade de Terapia Intensiva (UTI)  são historicamente escasso pelo seu alto custo diário \cite{murthy2015intensive}. De acordo com o Conselho Federal de Medicina, no ano de 2018, 21.500 leitos de UTI no Brasil foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}. Com a alta quantidade de novos casos de COVID-19 de leitos de UTI durante a pandemia, foram disponibilizados 3.104 novos leitos para leitos de UTI SUS \cite{cotrim2020crescimento}, o que ajudou momentaneamente alguns lugares específicos.
+No Brasil os leitos de Unidade de Terapia Intensiva (UTI)  são historicamente escassos pelo seu alto custo diário \cite{murthy2015intensive}. De acordo com o Conselho Federal de Medicina, no ano de 2018, 21.500 leitos de UTI no Brasil foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}. Com a alta quantidade de novos casos de COVID-19 de leitos de UTI durante a pandemia, foram disponibilizados 3.104 novos leitos para leitos de UTI SUS \cite{cotrim2020crescimento}, o que ajudou momentaneamente alguns lugares específicos.
 
-Diante dessa estrutura precária nos hospitais públicos, os leitos de UTI  ficaram escassos rapidamente, o que ocasionou alta quantidade de mortes por falta de recursos. Os profissionais de saúde na linha de frente de atendimento se depararam com o fato de uma escassez de recursos para um grande número de indivíduos necessitados deles. Surge-se então o acionamento de protocolos para a triagem para uma minimização de mortes devido à doença. A não utilização de protocolos implicaria em situações absurdamente imorais, tais como a chegada do recurso escasso por ordem de entrada ou mesmo sorteio ou ainda a não oferta do recurso para ninguém \cite{costa2020protocolos}.
+Diante dessa estrutura precária nos hospitais públicos, os leitos de UTI  ficaram escassos rapidamente, o que ocasionou alta quantidade de mortes por falta de recursos. Os profissionais de saúde na linha de frente de atendimento se depararam com o fato de uma escassez de recursos para um grande número de indivíduos necessitados. Surge-se então o acionamento de protocolos para a triagem para uma minimização de mortes devido à doença. A não utilização de protocolos implicaria em situações absurdamente imorais, tais como a chegada do recurso escasso por ordem de entrada ou mesmo sorteio ou ainda a não oferta do recurso para ninguém \cite{costa2020protocolos}.
 
 Uma pesquisa realizada pela Fundação Getúlio Vargas e Fundação Oswaldo Cruz consultou 1.829 profissionais de saúde no Brasil em março de 2021, 85,4\% dos médicos entrevistados relataram que tiveram sua saúde mental afetada negativamente pela pandemia \cite{paulomotoryn2021}. Um dos pontos que influenciam diretamente e tem provocado grandes mudanças psicológicas negativas durante a pandemia, é a responsabilidade que o médico tem de escolher qual paciente tem o quadro clínico mais adequado para poder ocupar um leito de UTI \cite{teixeira2020processo}.
 
-Um protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB) trouxe algumas regras pensadas pela equipe médica para serem eticamente defensíveis, garantindo que processos de alocação de recursos em esgotamento não ocorram em segredo, sem registro apropriado e de maneira subjetiva e inconsistente. O protocolo surgiu para que as escolhas médicas sejam claras, transparentes, tecnicamente bem embasados, eticamente justificados e que estejam alinhados ao arcabouço legal brasileiro \cite{kretzer2020protocolo}.
+Um protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB) trouxe algumas regras pensadas pela equipe médica para serem eticamente defensáveis, garantindo que processos de alocação de recursos em esgotamento não ocorram em segredo, sem registro apropriado e de maneira subjetiva e inconsistente. O protocolo surgiu para que as escolhas médicas sejam claras, transparentes, tecnicamente bem embasados, eticamente justificados e que estejam alinhados ao arcabouço legal brasileiro \cite{kretzer2020protocolo}.
 
-\section{Associação de Medicina Intensiva Brasileira (AMIB)}
+\section{ASSOCIAÇÃO DE MEDICINA INTENSIVA BRASILEIRA (AMIB)}
 
 Em momentos não pandêmicos o serviço público em saúde oferece leitos de UTI baseados em dois fatores: Na necessidade de terapias de suporte orgânico e probabilidade de recuperação. Nesse cenário o centro da atenção no atendimento da área de saúde sobre o indivíduo, portanto todas as decisões em relação ao plano de cuidados do paciente, diante do possível, pode ser compartilhadas entre a equipe assistente, paciente e familiares, de maneira a refletir não apenas aspectos clínicos mas também os valores e desejos dos envolvidos não sendo considerada uma infração ética ou legal que medidas de suporte orgânico não sejam oferecidas a pacientes que se encontram em fase final de vida. 
 
@@ -59,33 +58,25 @@ Quando em momentos pandêmicos, que no caso do COVID-19, ocasionou o indesejáve
 
 Diante da pandemia, a Associação de Medicina Intensiva Brasileira, propôs um protocolo que inclui um modelo de triagem baseado em um modelo de aceitabilidade social \cite{biddison2019too} e ajustando as leis do país, portanto sendo uma intersecção dentre três áreas: 
 \begin{enumerate}
-\item  Ético, Legais e aceitabilidade social - Modelo que protege de potenciais questionamentos jurídicos.
-\item Aplicabilidade - Modelo complexo para oferecer uma segurança preditiva e que seja aplicável na prática.
-\item Área técnica - Modelo que auxilia o profissional de saúde tomar decisões complexas associadas a alocação de leitos de UTI e ventiladores, retirando uma grande carga de responsabilidade deixando o processo de decisão mais transparente.
+    \item  Ético, Legais e aceitabilidade social - Modelo que protege de potenciais questionamentos jurídicos.
+    \item Aplicabilidade - Modelo complexo para oferecer uma segurança preditiva e que seja aplicável na prática.
+    \item Área técnica - Modelo que auxilia o profissional de saúde tomar decisões complexas associadas a alocação de leitos de UTI e ventiladores, retirando uma grande carga de responsabilidade deixando o processo de decisão mais transparente.
 \end{enumerate}
 
 O objetivo do protocolo em questão é salvar o maior número possível de vidas no menor tempo e com menos recursos, proteger os profissionais do peso moral e jurídico da decisão, com transparência do processo de decisão, prestando contas a sociedade das escolhas que estão sendo realizadas, com a aplicabilidade para todos os pacientes, sendo com o vírus que ocasionou a crise ou doenças não pandêmicas.
 
 O protocolo lista as condições essenciais para o início da implementação das regras, sendo o elas o reconhecimento de estado de emergência em saúde pública, reconhecimento de que tenha havido esforços razoáveis em aumentar a oferta dos recursos em esgotamento, criação de comissões de triagem hospitalares pelos diretores técnicos, alinhamento da gestão do protocolo intra-hospitalar com o sistema de regulação de leitos, locais/regionais que facilite a disponibilidade de leitos entre unidades hospitalares, monitoração regular da condição de esgotamento de recursos de forma a identificar a necessidade do início da aplicação do protocolo bem como as condições para seu encerramento e anúncio público do início e encerramento da aplicação do protocolo.
 
-
-% Quanto à aplicação do modelo de triagem de pacientes que necessitem de leito de UTI ou suporte ventilatório:  Identificar a presença por parte do paciente de Diretivas Antecipadas de Vontade ou expressões de desejos prévios de não receber tratamento em UTI ou de ser submetido à ventilação mecânica invasiva. Isto pode ser feito com a ajuda do médico assistente e familiares. Estes pacientes deverão ter seus desejos respeitados e não deverão ser triados.2. Manter a estabilização clínica enquanto os dados de triagem necessários sejam colhidos - idealmente os dados devem estar disponíveis em um período de 90 minutos. 3. Calcular a pontuação do paciente conforme o SOFA, presença de co-morbidades que sugiram uma probabilidade maior de sobrevida inferior a um ano (preferencialmente via SPICT: presença de pelo menos dois critérios) e ECOG (ver passo a passo na tabela 1). 4. Alocar os leitos de UTI e/ou ventiladores mecânicos aos pacientes com menores pontuações. 5. Utilizar a pontuação total do SOFA como primeiro critério desempate. Persistindo o empate na pontuação entre pacientes a equipe de triagem deve ser acionada de forma a fazer a alocação de recursos baseado em julgamento clínico. 6. Comunicar de maneira empática a pacientes e familiares sobre o processo de triagem, informá-los da pontuação atual do paciente e acolher as necessidades de informação e as necessidadesemocionais e espirituais sempre que possível. 7. Fazer registro apropriado da pontuação do paciente em prontuário. 8. Manter pacientes que não foram priorizados na lista de triagem e no aguardo da disponibilidade de leitos de UTI ou ventiladores mecânicos. Reavaliar esses pacientes regularmente, mantendo cálculos atualizados. Pacientes poderão solicitar exclusão da triagem a qualquer momento. 9. Reavaliação regular dos pacientes que foram alocados leitos de UTI ou ventiladores mecânicos; evitar a distanásia.
-
-%Quanto aos cuidados aos pacientes que não desejaram ou a quem não foram alocados leitos de UTI ou ventiladores 1. Pacientes que não serão internados em UTI ou que não receberão suporte ventilatório devem ser internados em enfermaria e receber todos os demais cuidados e medidas de estabilização clínica com o quais consentirem. 2. Pacientes que se aproximam da morte devem receber todos os cuidados que garantam a dignidade e a prevenção e tratamento dos sofrimentos físicos, sócio-emocionais e espirituais. 3. Um protocolo institucional de controle de sintomas que incluam medidas de boa prática no controle da dispneia e sedação paliativa quando esta for necessária deve estar disponível. 4. Garantir acesso à comunicação (ainda que virtual) entre familiares e pacientes, incluindo quando possível e sob supervisão de equipe de psicologia oportunidades para rituais de despedida.
-
-% Quanto as comissões de triagem Outras medidas de boa prática A utilização de um protocolo de maneira consistente pelas diversas instituições de saúde garante que um maior número de pacientes sejam igualmente sujeitos aos mesmos critérios chancelados pelas autoridades responsáveis tanto pelo zelo técnico-científico quanto o ético-legal do processo.
-
 \subsection{CRITÉRIOS DO PROTOCOLO}
 
-Existe uma primeira versão do protocolo de triagem sugerido pelo AMIB no ano de 2020, porém foi atualizada em uma segunda versão com considerações relevantes da Associação Brasileira de
-Medicina de Emergência (ABRAMEDE), Sociedade Brasileira de Geriatria e Gerontologia (SBGG) e Academia Nacional de Cuidados Paliativos(ANCP). Na nova versão foi removido o critério de idade por questão ética, jurídica e descriminatória. Portanto foi adicionado o ECOG como medida de funcionalidade do paciente.
+Amplamente difundido entre os profissionais de saúde, principalmente na área de intensivistas, a primeira versão criada do protocolo de triagem de alocação de recursos em esgotamento durante a pandemia por COVID-19, sugerido pelo AMIB no ano de 2020, foi debatida sob o aspecto das variáveis extraídas, com o objetivo de melhorar o protocolo e ser uma alternativa em momentos críticos. Realizou-se uma atualização em uma segunda versão, com considerações relevantes da Associação Brasileira de Medicina de Emergência (ABRAMEDE), da Sociedade Brasileira de Geriatria e Gerontologia (SBGG) e Academia Nacional de Cuidados Paliativos(ANCP), melhorando a forma de escrita, justificando as mudanças com embasamento científico, e realizando mudanças, destaca-se a modificação de uma variável, e modificação do critério de desempate.
 
-O modelo leva em consideração 3 critérios clínicos: avaliação da gravidade da situação aguda do paciente (órgãos comprometidos calculados pelo SOFA), comorbidades graves (se o conjunto de comorbidades é avançada o suficiente que determina que a vida termina em menos de 12 meses) e a escala que mede o quão funcional o paciente depende (calculado pelo ECOG).
+A nova versão teve a modificação do critério sob a idade do paciente, que por questões ética, jurídica e discriminatória, entendeu-se que altera-la pelo ECOG, como medida de funcionalidade do paciente, será mais eficaz em uma análise sob a condição de saúde do paciente.
+Ainda nesse aspecto, outra informação alterada, é o último critério de desempate caso os anteriores não foram possíveis de ser aplicados, na primeira versão, era definido uma randomização dos pacientes na espera. Na versão atual, o último critério é um julgamento clínico da equipe de triagem.
 
-Conforme a Figura \ref{Passos-modelo-triagem-AMIB-ABRAMEDE}
+O modelo de triagem leva em consideração 3 critérios clínicos: avaliação da gravidade da situação aguda do paciente (órgãos comprometidos calculados pelo SOFA), comorbidades graves (se o conjunto de comorbidades é avançada o suficiente que determina um período previsto de vida) e a escala que mede o quão funcional o paciente depende (calculado pelo ECOG) conforme a Figura \ref{Passos-modelo-triagem-AMIB-ABRAMEDE}:
 
-
-\begin{figure}[!htb]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{img/Tabela de pontuacoes e criterios.png}
     \centering
@@ -93,14 +84,13 @@ Conforme a Figura \ref{Passos-modelo-triagem-AMIB-ABRAMEDE}
     \label{Passos-modelo-triagem-AMIB-ABRAMEDE}
 \end{figure}
 
-\clearpage
+Para um entendimento melhor do porque foi escolhido esses critérios pela equipe do AMIB, será descrito o que são os critérios.
 
 \subsubsection{CRITÉRIO 1 - SEQUENTIAL ORGAN FAILURE ASSESSMENT (SOFA)}
 
-O SOFA é o primeiro critério do protocolo AMIB, ele avalia objetivamente o avanço de uma disfunção orgânica em pacientes que apresentam alguma infecção, bem como a mortalidade diante de um estado de saúde crítico de um indivíduo.
-O SOFA avalia 6 sistemas diferentes a partir de diversos exames clínicos e laboratoriais, e prediz a mortalidade de pacientes com sepse a partir da pontuação \cite{lambden2019sofa}.
+O SOFA é o primeiro critério do protocolo AMIB, ele avalia objetivamente o avanço de uma disfunção orgânica em pacientes que apresentam alguma infecção, bem como a mortalidade diante de um estado de saúde crítico de um indivíduo, avaliando seis sistemas diferentes a partir de diversos exames clínicos e laboratoriais, e prediz a mortalidade de pacientes com sepse (presença de disfunção orgânica que ameaça a vida, por conta de uma resposta exacerbada a uma infecção) a partir da pontuação \cite{lambden2019sofa}.
 
-O escore SOFA é composto por 6 variáveis, cada uma representando um sistema do órgão. À cada sistema do órgão é atribuído um valor entre zero e quatro pontos, sendo zero o valor representando que o sistema está normal, e 4 representando que o sistema está em um alto grau de disfunção ou falência. A soma dos pontos do escore SOFA varia entre zero e vinte e quatro (0-24), existindo uma relação entre a pontuação do SOFA com uma porcentagem referente à mortalidade do paciente, a tabela a seguir demonstra essa relação:
+Cada um dos seis sistemas, representam um sistema do órgão, sendo atribuído um valor entre zero e quatro pontos, sendo zero o valor representando que o sistema está normal, e quatro representando que o sistema está em um alto grau de disfunção ou falência. A soma dos pontos do escore SOFA varia entre zero e vinte e quatro (0-24), existindo uma relação entre a pontuação do SOFA com uma porcentagem referente à mortalidade do paciente, a tabela a seguir demonstra essa relação:
 
 \begin{center}
     \begin{tabular}{l r r r}
@@ -118,20 +108,22 @@ O escore SOFA é composto por 6 variáveis, cada uma representando um sistema do
 \end{center}
 
 
-Os seis sistemas são avaliados e recebem uma pontuação, são eles: Os sistemas respiratório, cardiovascular, hepático, renal, neurológico e de coagulação. A pontuação deve ser calculada 24 horas após a admissão e a cada 48 horas depois — justificando o termo “sequencial” do nome da pontuação.
+Os seis sistemas são avaliados e recebem uma pontuação, são eles: O sistema respiratório, cardiovascular, hepático, renal, neurológico e de coagulação. A pontuação deve ser calculada 24 horas após a admissão e a cada 48 horas depois o que  justifica o termo “sequencial” do nome da pontuação.
 
-\todo{VERIFICAR AQUI NOVAMENTE}
-SISTEMA RESPIRATÓRIO: é avaliado a partir da razão entre PaO2/FiO2, a partir de dados obtidos através de gasometria arterial. Essa razão é dada em milímetros de mercúrio (mmHg) e é considerada sem alterações quando seu valor está acima de 400mmHg. Abaixo de 400, 1 ponto no SOFA. Abaixo de 300, 2 pontos. A pontuação é 3 quando o paciente está em suporte ventilatório com a PaO2/FiO2 abaixo de 200, e ele recebe a pontuação máxima quando a relação tem resultado menor que 100mmHg com suporte ventilatório.
-
-COAGULAÇÃO: é avaliada a partir do plaquetograma. O valor considerado de referência, ou seja, que não pontua no score SOFA, é 150.000/mm³. Os valores de corte para as pontuações de 1 a 4, respectivamente, são abaixo de 150, 100, 50 e 20. 
-
-AVALIAÇÃO HEPÁTICA: realizada com o exame de bilirrubinas totais, que é considerado dentro dos valores de normalidade quando está abaixo de 1,2mg/dL \cite{lambden2019sofa}.
-
-SISTEMA CARDIOVASCULAR: o paciente que apresenta hipotensão e necessidade de droga vasoativa (DVA) é quem pontua nesta parte do score. É mensurado a partir da pressão arterial média, que recebe 1 ponto em caso de PAM<70mmHg. A partir do 2º ponto, é considerado o uso de DVA – 2 pontos se uso de dopamina<5 ou dobutamina em qualquer dose;  3 pontos em caso de uso de dopamina, noradrenalina ou adrenalina em doses mais baixas, e em caso de aumento da dosagem das DVAs, o paciente recebe a pontuação de 4 pontos.
-
-SISTEMA NEUROLÓGICO: recebe avaliação a partir da escala de coma de Glasgow.
-
-SISTEMA RENAL: é avaliado por dois parâmetros – creatinina e o débito urinário (a partir de 3 pontos). A creatinina se demonstra alterada a partir de 1,2mg/dL, pontuando 1 até 1,9mg/dL. Valores de 2,0 a 3,4mg/dL pontuam 2, enquanto o paciente que apresenta diurese menor que 500 ml por dia OU creatinina de 3,5 a 4,9mg/dL pontua 3. Quando a diurese é inferior a 200 ml por dia ou a creatinina é superior a 5, o paciente recebe o score máximo \cite{lambden2019sofa}.
+\begin{enumerate}
+    \item Sistema respiratório: avaliado a partir de dados obtidos através de gasometria arterial, coletado através de um exame de sangue em uma artéria, sendo avaliado da razão entre PaO2/FiO2, os gases presentes no sangue, como o oxigênio o gás carbônico \cite{mota2010disturbios}. Abaixo de 400, 1 ponto no SOFA. Abaixo de 300, 2 pontos. A pontuação é 3 quando o paciente está em suporte ventilatório com a PaO2/FiO2 abaixo de 200, e ele recebe a pontuação máxima quando a relação tem resultado menor que 100mmHg com suporte ventilatório.
+    
+    \item Sistema coagulação: avaliado a partir do exame de contagem de plaquetas/trombócitos no sangue (plaquetograma). O valor considerado de referência, ou seja, que não pontua no score SOFA, é 150.000/mm³. Os valores de corte para as pontuações de 1 a 4, respectivamente, são abaixo de 150, 100, 50 e 20.
+    
+    \item Sistema hepático: realizada com o exame de bilirrubinas totais para avaliar o funcionamento do fígado, é uma substância alaranjada produzida quando o fígado decompõe glóbulos vermelhos velhos \cite{lambden2019sofa}.
+    
+    \item Sistema cardiovascular: o paciente que apresenta hipotensão e necessidade de droga vasoativa (DVA) é quem pontua nesta parte do score. É mensurado a partir da pressão arterial média, que recebe 1 ponto em caso de PAM<70mmHg. A partir do 2º ponto, é considerado o uso de DVA – 2 pontos se uso de dopamina<5 ou dobutamina em qualquer dose;  3 pontos em caso de uso de dopamina, noradrenalina ou adrenalina em doses mais baixas, e em caso de aumento da dosagem das DVAs, o paciente recebe a pontuação de 4 pontos \cite{nakashima2020intervindo}.
+    
+    \item Sistema neurológico: recebe avaliação a partir da escala de coma de Glasgow.
+    
+    \item Sistema renal: para a avaliação é considerado dois parâmetros: 1-creatinina; 2-débito urinário. A creatinina se demonstra alterada a partir de 1,2mg/dL, pontuando 1 até 1,9mg/dL. Valores de 2,0 a 3,4mg/dL pontuam 2, enquanto o paciente que apresenta diurese menor que 500 ml por dia OU creatinina de 3,5 a 4,9mg/dL pontua 3. Quando a diurese é inferior a 200 ml por dia ou a creatinina é superior a 5, o paciente recebe o score máximo \cite{lambden2019sofa}.
+    
+\end{enumerate}
 
 \subsubsection{CRITÉRIO 2 - SUPPORTIVE AND PALLIATIVE CARE INDICATORS TOOL (SPICT)}
 
@@ -139,14 +131,13 @@ A ferramenta SPICT-BR é o segundo critério do protocolo AMIB, é uma lista de 
 cardiovasculares, doenças renais, respiratórias, hepáticas, câncer, doenças neurológicas e
 demências e fragilidades \cite{rodriguez2021pergunta}. Para que haja a indicação de cuidado paliativo do paciente necessita pontuar pelo menos 02 ou mais dos indicadores gerais e 01 indicador específico. O SPICT-BR foi traduzido e validado para utilização em pacientes brasileiros em abril de 2016. A Pergunta Surpresa, corresponde ao questionamento – “Você acredita que o seu paciente tem expectativa de vida menor do que 12 meses?”, direcionado à equipe de saúde, mas especificamente, ao médico assistente. Se a resposta for “Sim”, o paciente se beneficiará dos Cuidados Paliativos.
 
-Para o protocolo AMIB, se caso o paciente estiver com a pergunta surpresa como "Sim" receberá 3 pontos no total.
+Para o protocolo AMIB, se caso o paciente estiver com a pergunta surpresa como "Sim" receberá 3 pontos no total, caso contrário não soma.
 
 \subsubsection{CRITÉRIO 3 - EASTERN COOPERATIVE ONCOLOGY GROUP (ECOG)}
 O Eastern Cooperative Oncology Group (ECOG) é o terceiro critério do protocolo AMIB, é um
 instrumento validado e amplamente utilizado em oncologia e que busca quantificar a capacidade funcional física e capacidade de independência e auto-cuidado do paciente. A inferência é que quanto pior o PS do paciente menor sua reserva fisiológica e piores os desfechos clínicos.
 
-A coleta desta medida deve ser referente ao estatus de performance que o paciente exiba nas duas a quatro semanas que antecederam a internação de maneira a excluir o fator confundidor da presença de doença aguda que possa ter se iniciado nas duas semanas imediatamente anteriores a internação hospitalar. Não recomendamos o uso deste critério, sem uma avaliação clínica individualizada, a pacientes portadores de deficiências físicas de longa data e que apresentem uma boa condição de adaptação \cite{pinto2000physician}.
-\todo{REVISAR AQUI TBM}
+A coleta desta medida deve ser referente à performance que o paciente exiba nas duas a quatro semanas que antecederam a internação de maneira a excluir o fator confundidor da presença de doença aguda que possa ter se iniciado nas duas semanas imediatamente anteriores a internação hospitalar. Não recomendamos o uso deste critério, sem uma avaliação clínica individualizada, a pacientes portadores de deficiências físicas de longa data e que apresentem uma boa condição de adaptação \cite{pinto2000physician}.
 
 \section{ALGORITMO PARA GERAÇÃO DE DADOS}
 
@@ -196,8 +187,6 @@ Portanto para calcular a pontuação total dos três critérios levanta-se a seg
 \end{split}
 \] 
 
-%A alocação de leito de UTI ou VM, conforme o protocolo AMIB, deve ser realizado com o paciente que estiver com a menor pontuação total, desde que não tenha havido empate. Se caso empate da pontuação total, deve ser notado o menor escore do SOFA total e se assim mesmo estiver com empate nessa somatória, o julgamento clínico será da equipe de triagem. 
-
 Portanto, dados dois pacientes, $p_1$ e $p_2$, o protocolo decide entre os dois primeiramente comparando o valor de $t$ calculado para cada um, se  $t_{p_1}$ for menor que $t_{p_2}$ o protocolo prescreve que a preferência na obtenção do leito seja de $p_1.$ sendo a recíproca naturalmente verdadeira.
 
 Se $t$ for igual para $p_1$ e $p_2$, o protocolo sugere é realizada a comparação de ambos usando $s$. Se caso $t$ e $s$ serem iguais para $p_1$ e $p_2$, utiliza-se o julgamento clínico será da equipe de triagem, ou seja, um ou mais profissionais decidirão entre ambos, para qual utilizará um leito de UTI.
@@ -209,7 +198,7 @@ Após mapear as variáveis com os critérios do protocolo AMIB, é possível rea
 
 A criação de um algoritmo desenvolvido para este artigo com as $a_1$ até $a_8$ e os critérios $C_1$, $C_2$ e $C_3$ resulta em saídas onde é escolhido um paciente sem ocorrer empate, ou é realizado um empate da soma total, porém o critério de desempate SOFA resolve, porém para esse artigo, decidiu-se forçar casos clínicos em que o protocolo seja incapaz de fornecer distinção relevante a respeito de priorização de paciente relação a outro, no caso em que o protocolo sugere julgamento clínico, voltando a total responsabilidade para pessoas.
 Notadamente, é possível desenhar uma função $\alpha \in [0, 1]$ que informe o grau de certeza com o qual o protocolo determina a prioridade:
-
+% REVISAR ESSE CÁLCULO----
 \[
 \alpha = \begin{cases}
     \frac{t_{p_1} - t_{p_2}}{\max_t - \min_t}, \text{se } t_{p_1} - t_{p_2} \neq 0 \\
@@ -219,7 +208,7 @@ Notadamente, é possível desenhar uma função $\alpha \in [0, 1]$ que informe 
     0, \text{se o protocolo julgamento clínico da equipe de triagem}
 \end{cases}
 \] 
-\todo{TEM QUE REVISAR ESSE CALCULO}
+% REVISAR ESSE CÁLCULO----
 
 Com o objetivo deste artigo sendo minimizar $\alpha$, será trivial considerando o caso de dois pacientes com todos os critérios idênticos, mas esse caso foge do que é desejável, pois não são cabíveis quaisquer outros argumentos quanto a priorização.
 Para tando, utiliza-se a noção de inércia ($i$) como medida de homogeneidade, de forma que valores menores de $i$ implicam em conjuntos de pacientes mais homogêneos.

@@ -31,24 +31,27 @@ Universidade Regional do Noroeste do Estado do Rio Grande do Sul
 
 Nos últimos cem anos, a maior pandemia ocasionada pela doença da COVID19 em 2020 foi a mais mortal, presenciamos um cenário de colapso da estrutura hospitalar pública, falta de leitos, de respiradores e profissionais da saúde. Os leitos de Unidade de Terapia Intensiva (UTI) foram alocados na sua totalidade, portanto, médicos tiveram um desafio de entender a prioridade de um paciente em um leito de UTI devido a alta demanda, ocasionando em problemas psicológicos, muitas vezes sendo uma escolha baseada no emocional do médico. Durante esse período, médicos realizaram uma decisão de quem ocupava um leito disponível, utilizando protocolos de triagem e guias criados por vários lugares do mundo, para minimizar a quantidade de mortes, dentre eles o protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB). Este artigo tem por objetivo descrever o modelo publicado pela AMIB utilizado para a triagem, explicar a forma que as variáveis foram extraídas e demonstrar a forma da geração de dados sintéticos, com a intenção de validação dos critérios sugeridos.
 
-\textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI); Escassez de leitos hospitalares; Auxílio para médico na triagem;. Protocolo AMIB/ABRAMEDEE. Escala SOFA.
+\textbf{Palavras-chave:} Unidade de Terapia Intensiva (UTI); Escassez de leitos hospitalares; Auxílio para médico na triagem; Protocolo AMIB/ABRAMEDEE; Escala SOFA.
 
 \section{ABSTRACT} 
-\textbf{Keywords:} Intensive Care Unit (ICU). Shortage of hospital beds. Medical assistance. Hospital management. Protocol.
+
+In the last hundred years, the most deadly pandemic caused by the COVID19 disease in 2020, we witnessed a scenario of collapse of the public hospital structure, lack of beds, respirators, and health professionals. Intensive Care Unit (ICU) beds were allocated in their entirety, therefore, doctors had a challenge to understand the priority of a patient in an ICU bed due to high demand, causing psychological problems, often being a choice based on the doctor's emotions. During this period, physicians made a decision of who occupied an available bed, using triage protocols and guides created by several places in the world, to minimize the amount of deaths, among them the protocol published in 2020 by the Brazilian Intensive Care Medicine Association (AMIB). This article aims to describe the model published by AMIB used for triage, explain how the variables were extracted and demonstrate the way of generating synthetic data, with the intention of validating the suggested criteria.
+
+\textbf{Keywords:} Intensive Care Unit (ICU); Shortage of hospital beds; Assistance for doctors in triage; AMIB/ABRAMEDEE protocol; SOFA scale.
 
 \section{INTRODUÇÃO}
 
 Em 31 de dezembro de 2019 foi reportado casos de uma grave pneumonia de origem desconhecida na província de Hubei em Wuhan/China para a Organização Mundial de Saúde (OMS), a qual foi nominada de "Covid-19" para uma síndrome respiratória aguda grave causada pelo novo vírus identificado Sars-CoV-2, sendo uma doença facilmente contagiosa, transmitida por gotículas, recebendo mutações constantemente \cite{sa2020especial}. 
 
-Em fevereiro do ano de 2020 foi registrado o primeiro caso no Brasil, com o passar dos dias os casos aumentaram exponencialmente no mundo todo, alcançando um nível de ameaça global muito elevado, em poucos dias todos os estados do Brasil tinham centenas de pacientes com a doença, ocasionando em internações em leitos de UTI, se tornando a maior pandemia dos últimos cem anos.
+Em fevereiro do ano de 2020 foi registrado o primeiro caso no Brasil, com o passar dos dias os casos aumentaram exponencialmente no mundo todo, alcançando um nível de ameaça global muito elevado, em poucos dias todos os estados do Brasil tinham centenas de pacientes com a doença, ocasionando em internações em leitos de Unidade de Terapia Intensiva (UTI), se tornando a maior pandemia dos últimos cem anos.
 
-No Brasil os leitos de Unidade de Terapia Intensiva (UTI)  são historicamente escassos pelo seu alto custo diário \cite{murthy2015intensive}. De acordo com o Conselho Federal de Medicina, no ano de 2018, 21.500 leitos de UTI no Brasil foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}. Com a alta quantidade de novos casos de COVID-19 de leitos de UTI durante a pandemia, foram disponibilizados 3.104 novos leitos para leitos de UTI SUS \cite{cotrim2020crescimento}, o que ajudou momentaneamente alguns lugares específicos.
+No Brasil os leitos de UTI são historicamente escassos pelo seu alto custo diário \cite{murthy2015intensive}. De acordo com o Conselho Federal de Medicina, 21.500 leitos de UTI no Brasil, no ano de 2018, foram disponibilizados pelo Sistema Único de Saúde (SUS) \cite{cfm2018,cfm2020}. Com a alta quantidade de novos casos de COVID-19 de leitos de UTI durante a pandemia, foram disponibilizados 3.104 novos leitos para leitos de UTI SUS \cite{cotrim2020crescimento}, o que ajudou momentaneamente alguns lugares específicos.
 
-Diante dessa estrutura precária nos hospitais públicos, os leitos de UTI  ficaram escassos rapidamente, o que ocasionou alta quantidade de mortes por falta de recursos. Os profissionais de saúde na linha de frente de atendimento se depararam com o fato de uma escassez de recursos para um grande número de indivíduos necessitados. Surge-se então o acionamento de protocolos para a triagem para uma minimização de mortes devido à doença. A não utilização de protocolos implicaria em situações absurdamente imorais, tais como a chegada do recurso escasso por ordem de entrada ou mesmo sorteio ou ainda a não oferta do recurso para ninguém \cite{costa2020protocolos}.
+Diante dessa estrutura precária nos hospitais públicos, os leitos de UTI  ficaram escassos rapidamente, o que ocasionou alta quantidade de mortes por falta de recursos. Os profissionais de saúde na linha de frente de atendimento se depararam com o fato de uma escassez de recursos para um grande número de indivíduos necessitados. Surge-se então o acionamento de protocolos de triagem para uma minimização de mortes devido à doença. A não utilização de protocolos implicaria em situações absurdamente imorais, tais como a chegada do recurso escasso por ordem de entrada ou mesmo sorteio ou ainda a não oferta do recurso para ninguém \cite{costa2020protocolos}.
 
 Uma pesquisa realizada pela Fundação Getúlio Vargas e Fundação Oswaldo Cruz consultou 1.829 profissionais de saúde no Brasil em março de 2021, 85,4\% dos médicos entrevistados relataram que tiveram sua saúde mental afetada negativamente pela pandemia \cite{paulomotoryn2021}. Um dos pontos que influenciam diretamente e tem provocado grandes mudanças psicológicas negativas durante a pandemia, é a responsabilidade que o médico tem de escolher qual paciente tem o quadro clínico mais adequado para poder ocupar um leito de UTI \cite{teixeira2020processo}.
 
-Um protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB) trouxe algumas regras pensadas pela equipe médica para serem eticamente defensáveis, garantindo que processos de alocação de recursos em esgotamento não ocorram em segredo, sem registro apropriado e de maneira subjetiva e inconsistente. O protocolo surgiu para que as escolhas médicas sejam claras, transparentes, tecnicamente bem embasados, eticamente justificados e que estejam alinhados ao arcabouço legal brasileiro \cite{kretzer2020protocolo}.
+Um protocolo publicado em 2020 pela Associação de Medicina Intensiva Brasileira (AMIB) trouxe algumas regras pensadas pela equipe médica para serem eticamente defensáveis, garantindo que processos de alocação de recursos em esgotamento não ocorram em segredo, sem registro apropriado e de maneira subjetiva e inconsistente. O protocolo surgiu para que as escolhas médicas sejam claras, transparentes, tecnicamente bem embasados, eticamente justificados e que estejam alinhados conforme as leis brasileiras \cite{kretzer2020protocolo}.
 
 \section{ASSOCIAÇÃO DE MEDICINA INTENSIVA BRASILEIRA (AMIB)}
 
@@ -58,9 +61,9 @@ Quando em momentos pandêmicos, que no caso do COVID-19, ocasionou o indesejáve
 
 Diante da pandemia, a Associação de Medicina Intensiva Brasileira, propôs um protocolo que inclui um modelo de triagem baseado em um modelo de aceitabilidade social \cite{biddison2019too} e ajustando as leis do país, portanto sendo uma intersecção dentre três áreas: 
 \begin{enumerate}
-    \item  Ético, Legais e aceitabilidade social - Modelo que protege de potenciais questionamentos jurídicos.
-    \item Aplicabilidade - Modelo complexo para oferecer uma segurança preditiva e que seja aplicável na prática.
-    \item Área técnica - Modelo que auxilia o profissional de saúde tomar decisões complexas associadas a alocação de leitos de UTI e ventiladores, retirando uma grande carga de responsabilidade deixando o processo de decisão mais transparente.
+    \item  Ético, legais e aceitabilidade social - modelo que protege de potenciais questionamentos jurídicos.
+    \item Aplicabilidade - modelo complexo para oferecer uma segurança preditiva e que seja aplicável na prática.
+    \item Área técnica - modelo que auxilia o profissional de saúde tomar decisões complexas associadas a alocação de leitos de UTI e ventiladores, retirando uma grande carga de responsabilidade deixando o processo de decisão mais transparente.
 \end{enumerate}
 
 O objetivo do protocolo em questão é salvar o maior número possível de vidas no menor tempo e com menos recursos, proteger os profissionais do peso moral e jurídico da decisão, com transparência do processo de decisão, prestando contas a sociedade das escolhas que estão sendo realizadas, com a aplicabilidade para todos os pacientes, sendo com o vírus que ocasionou a crise ou doenças não pandêmicas.
@@ -84,7 +87,7 @@ O modelo de triagem leva em consideração 3 critérios clínicos: avaliação d
     \label{Passos-modelo-triagem-AMIB-ABRAMEDE}
 \end{figure}
 
-Para um entendimento melhor do porque foi escolhido esses critérios pela equipe do AMIB, será descrito o que são os critérios.
+Para um entendimento melhor do motivo que foi escolhido esses critérios pela equipe do AMIB, será descrito o que são os critérios.
 
 \subsubsection{CRITÉRIO 1 - SEQUENTIAL ORGAN FAILURE ASSESSMENT (SOFA)}
 
@@ -129,15 +132,12 @@ Os seis sistemas são avaliados e recebem uma pontuação, são eles: O sistema 
 
 A ferramenta SPICT-BR é o segundo critério do protocolo AMIB, é uma lista de indicadores gerais de deterioração clínica e de indicadores de gravidades de doenças específicas: doenças
 cardiovasculares, doenças renais, respiratórias, hepáticas, câncer, doenças neurológicas e
-demências e fragilidades \cite{rodriguez2021pergunta}. Para que haja a indicação de cuidado paliativo do paciente necessita pontuar pelo menos 02 ou mais dos indicadores gerais e 01 indicador específico. O SPICT-BR foi traduzido e validado para utilização em pacientes brasileiros em abril de 2016. A Pergunta Surpresa, corresponde ao questionamento – “Você acredita que o seu paciente tem expectativa de vida menor do que 12 meses?”, direcionado à equipe de saúde, mas especificamente, ao médico assistente. Se a resposta for “Sim”, o paciente se beneficiará dos Cuidados Paliativos.
-
-Para o protocolo AMIB, se caso o paciente estiver com a pergunta surpresa como "Sim" receberá 3 pontos no total, caso contrário não soma.
+demências e fragilidades \cite{rodriguez2021pergunta}. Para que haja a indicação de cuidado paliativo do paciente necessita pontuar pelo menos 02 ou mais dos indicadores gerais e 01 indicador específico. O SPICT-BR foi traduzido e validado para utilização em pacientes brasileiros em abril de 2016. A Pergunta Surpresa, corresponde ao questionamento – “Você acredita que o seu paciente tem expectativa de vida menor do que 12 meses?”, direcionado à equipe de saúde, mas especificamente, ao médico. Se a resposta for “Sim”, conforme o protocolo AMIB, receberá 3 pontos no total, caso contrário não somará.
 
 \subsubsection{CRITÉRIO 3 - EASTERN COOPERATIVE ONCOLOGY GROUP (ECOG)}
-O Eastern Cooperative Oncology Group (ECOG) é o terceiro critério do protocolo AMIB, é um
-instrumento validado e amplamente utilizado em oncologia e que busca quantificar a capacidade funcional física e capacidade de independência e auto-cuidado do paciente. A inferência é que quanto pior o PS do paciente menor sua reserva fisiológica e piores os desfechos clínicos.
+O Eastern Cooperative Oncology Group (ECOG) é o terceiro critério do protocolo AMIB, é um instrumento validado e amplamente utilizado em oncologia e que busca quantificar a capacidade funcional física e capacidade de independência e auto-cuidado do paciente. A inferência é que quanto pior a escala de performance do paciente menor sua reserva fisiológica e piores os desfechos clínicos.
 
-A coleta desta medida deve ser referente à performance que o paciente exiba nas duas a quatro semanas que antecederam a internação de maneira a excluir o fator confundidor da presença de doença aguda que possa ter se iniciado nas duas semanas imediatamente anteriores a internação hospitalar. Não recomendamos o uso deste critério, sem uma avaliação clínica individualizada, a pacientes portadores de deficiências físicas de longa data e que apresentem uma boa condição de adaptação \cite{pinto2000physician}.
+A coleta desta medida deve ser referente à performance que o paciente exiba nas duas a quatro semanas que antecederam a internação de maneira a excluir o fator confundidor da presença de doença aguda que possa ter se iniciado nas duas semanas imediatamente anteriores a internação hospitalar. Não é recomendado o uso deste critério, sem uma avaliação clínica individualizada, a pacientes portadores de deficiências físicas de longa data e que apresentem uma boa condição de adaptação \cite{pinto2000physician}.
 
 \section{ALGORITMO PARA GERAÇÃO DE DADOS}
 
@@ -187,7 +187,7 @@ Portanto para calcular a pontuação total dos três critérios levanta-se a seg
 \end{split}
 \] 
 
-Portanto, dados dois pacientes, $p_1$ e $p_2$, o protocolo decide entre os dois primeiramente comparando o valor de $t$ calculado para cada um, se  $t_{p_1}$ for menor que $t_{p_2}$ o protocolo prescreve que a preferência na obtenção do leito seja de $p_1.$ sendo a recíproca naturalmente verdadeira.
+Portanto, dados dois pacientes, $p_1$ e $p_2$, o protocolo decide entre os dois primeiramente comparando o valor de $t$ calculado para cada um, se  $t_{p_1}$ for menor que $t_{p_2}$ o protocolo prescreve que a preferência na obtenção do leito seja de $p_1$, sendo a recíproca naturalmente verdadeira.
 
 Se $t$ for igual para $p_1$ e $p_2$, o protocolo sugere é realizada a comparação de ambos usando $s$. Se caso $t$ e $s$ serem iguais para $p_1$ e $p_2$, utiliza-se o julgamento clínico será da equipe de triagem, ou seja, um ou mais profissionais decidirão entre ambos, para qual utilizará um leito de UTI.
 
@@ -222,7 +222,6 @@ Considerando $P$ o conjunto de pacientes, $c$ o centro de massa desse conjunto e
 
 Considerando uma função de qualidade $\frac{I}{\alpha}$, realiza-se uma busca por um conjunto especificado de dez pacientes da seguintes forma:
 
-É construído um novo paciente $P$ escolhendo um ponto nesse espaço de nove dimensões, nesse processo são feitas validações de $a_1$ até $a_9$ de forma que pertence aos conjuntos definidos, validando as seguintes regras clínicas:
 
 \[
 \begin{split}
@@ -235,6 +234,9 @@ Considerando uma função de qualidade $\frac{I}{\alpha}$, realiza-se uma busca 
     \end{cases}
 \end{split}
 \]
+
+É construído um novo paciente $P$ escolhendo um ponto nesse espaço de nove dimensões, nesse processo são feitas validações de $a_1$ até $a_9$ de forma que pertence aos conjuntos definidos, validando as seguintes regras clínicas:
+
 
 No mesmo algoritmo é construído um conjunto de 10 pacientes, para o conjunto é calculada a função $\frac{I}{\alpha}$ assim como os 10 subconjuntos de 9 elementos.
 No subconjunto com maior $\frac{I}{\alpha}$ será complementado com um novo paciente gerado e validado se o $\frac{I}{\alpha}$ ainda é maior $\frac{I}{\alpha}$ do conjunto original.
@@ -267,9 +269,9 @@ Para uma visualização mais detalhada dos mesmos dados, mostra-se o resultado d
 \end{figure}
 
 
-Quando colocado cada paciente comparando com todos, temos um milhão de registros simulando decisões em pares com cada paciente, de forma simplificada o algoritmo foi desenvolvido para gerar cem conjuntos de 10 pacientes, esses contém o mesmo total de pontos AMIB e o mesmo SOFA, ou seja, esses 10 pacientes devem ser julgado por um médico. 
+Quando colocado cada paciente comparando com todos, temos um milhão de registros simulando decisões em pares com cada paciente, de forma simplificada o algoritmo foi desenvolvido para gerar cem conjuntos de dez pacientes, esses contém o mesmo total de pontos AMIB e o mesmo SOFA, ou seja, esses dez pacientes devem ser julgado por um médico. 
 
-Diante dessa massa de dados, de mil registros, o algoritmo comparou cada registro com os outros novecentos e noventa e nove, para definir qual é o paciente prioritário a cada par, dessa comparação, gerou uma massa de dados de um milhão de registros a qual o protocolo AMIB classificou em 1, se for o primeiro paciente da dupla o mais prioritário, em 2 se for o segundo paciente e em 0 (zero) se não consegue definir um mais prioritário conforme as regras já citadas.
+Diante dessa massa de dados, de mil registros, o algoritmo comparou cada registro com os outros novecentos e noventa e nove, para definir qual é o paciente prioritário a cada par, dessa comparação, gerou uma massa de dados de um milhão de registros a qual o protocolo AMIB classificou com o número 1, se for o primeiro paciente da dupla o mais prioritário, com o número 2 se for o segundo paciente e com o número 0 (zero) se não consegue definir um mais prioritário conforme as regras já citadas.
 Na imagem abaixo notamos que somente 10\% das comparações as regras do protocolo AMIB não consegue decidir.
 
 \begin{figure}[!htb]
@@ -286,14 +288,7 @@ Na imagem abaixo notamos que somente 10\% das comparações as regras do protoco
 
 \section{CONSIDERAÇÕES FINAIS}
 
-Em um cenário de crise na saúde pública, nota-se a importância de utilizar um modelo de triagem para decisão clínica. Um protocolo criado pela Associação de Medicina Intensiva Brasileira, que tem dentre os objetivos, proteger os profissionais do peso moral e jurídico da decisão, com transparência do processo de decisão comprova-se que diante de dados clínicos gerados sinteticamente, e o algoritmo desenvolvido que o protocolo AMIB consegue discernir entre dois paciente em 90\% dos casos
-
-\section{PRÓXIMAS ETAPAS}
-
-Interessante usar colapso de função de onda \ldots
-
-Algoritmo genético para geração \ldots
-
+Em um cenário de crise na saúde pública, nota-se a importância de utilizar um modelo de triagem para decisão clínica para a ocupação dos leitos de UTI. O protocolo criado pela Associação de Medicina Intensiva Brasileira tem dentre os objetivos, proteger os profissionais do peso moral e jurídico da decisão com transparência do processo e principalmente, sair de uma crise sabendo que o protocolo contribuiu para reduzir o número de mortes a nível populacional. Neste artigo comprova-se que diante de dados clínicos gerados sinteticamente, utilizando uma formula matemática aplicada a regras do protocolo, desenvolvendo um algoritmo que consegue discernir entre dois pacientes, tendo um resultado de 90\% dos casos encontrando um paciente prioritário, assim confirmando a necessidade da utilização de um protocolo em crises em escassez de leitos de UTI.
 
 \section{REFERÊNCIAS BIBLIOGRÁFICAS}
 
